@@ -32,32 +32,34 @@ class TimersDashboard extends React.Component {
 
 class EditableTimerList extends React.Component {
     render(){
+        const timers = this.props.timers.map((timer) => (
+            <EditableTimer
+                key={timer.key}
+                id={timer.id}
+                title={timer.title}
+                project={thimer.project}
+                elapsed={timer.elapsed}
+                runningSince={timer.runningSince}
+            />
+        ));
         return(
             <div id='timers'>
-                <EditableTimer
-                    title='Learn React'
-                    project='Web Domination'
-                    elapsed='8986300'
-                    runningSince={null}
-                    editFormOpen={false}
-                />
-                <EditableTimer
-                    title='Learn extreme ironing'
-                    project='Web Domination'
-                    elapsed='3890985'
-                    runningSince={null}
-                    editFormOpen={true}
-                /> 
+                {timers}
             </div>
         );
     }
 }
 
 class EditableTimer extends React.Component{
+    state = {
+        editFormOpen: false,
+    };
+
     render(){
-        if (this.props.editFormOpen){
+        if (this.state.editFormOpen){
             return(
                 <TimerForm
+                    id={this.props.id}
                     title={this.props.title}
                     project={this.props.project}
                 />
@@ -65,6 +67,7 @@ class EditableTimer extends React.Component{
         } else {
             return (
                 <Timer
+                    id={this.props.id}
                     title={this.props.title}
                     project={this.props.project}
                     elapsed={this.props.elapsed}

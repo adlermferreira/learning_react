@@ -266,6 +266,14 @@ class Timer extends React.Component{
         clearInterval(this.forceUpdatedInterval);
     }
 
+    handleStartClick = () => {
+        this.props.onStartClick(this.props.id);
+    };
+
+    handleStopClick = () => {
+        this.props.onStopClick(this.props.id);
+    };
+
     handleTrashClick = () => {
         this.props.onTrashClick(this.props.id);
     };
@@ -305,6 +313,11 @@ class Timer extends React.Component{
                 <div className='ui bottom attached blue basic buttom'>
                     Start
                 </div>
+                <TimerActionButton
+                    timerIsRunning={!!this.props.runningSince}
+                    onStartClick={this.handleStartClick}
+                    onStopClick={this.handleStopClick}
+                />
             </div>
         );
     }
